@@ -156,7 +156,7 @@ def yoneda_lemma : yoneda_pairing C ≅ yoneda_evaluation C :=
 { hom :=
   { app := λ F x, ulift.up ((x.app F.1) (𝟙 (unop F.1))),
     naturality' :=
-    begin
+    begin abstract {
       intros X Y f, ext1, ext1,
       cases f, cases Y, cases X,
       dsimp,
@@ -165,24 +165,24 @@ def yoneda_lemma : yoneda_pairing C ≅ yoneda_evaluation C :=
            obj_map_id,
            functor_to_types.naturality,
            functor_to_types.map_id]
-    end },
+    } end },
   inv :=
   { app := λ F x,
     { app := λ X a, (F.2.map a.op) x.down,
       naturality' :=
-      begin
+      begin abstract {
         intros X Y f, ext1,
         cases x, cases F,
         dsimp,
         erw [functor_to_types.map_comp]
-      end },
+      } end },
     naturality' :=
-    begin
+    begin abstract {
       intros X Y f, ext1, ext1, ext1,
       cases x, cases f, cases Y, cases X,
       dsimp,
       erw [←functor_to_types.naturality, functor_to_types.map_comp]
-    end },
+    } end },
   hom_inv_id' :=
   begin
     ext1, ext1, ext1, ext1, cases X, dsimp,
